@@ -11,11 +11,11 @@
 #include "Include/Constants.mqh"
 #include "Include/Config.mqh"
 #include "Include/Logger.mqh"
-
+#include "Include/DataEngine.mqh"
 
 
 CLogger Logger;
-
+CDataEngine MarketData;
 
 
 //====================================================
@@ -54,6 +54,17 @@ void OnDeinit(const int reason)
 
 void OnTick()
 {
+
+   if(!MarketData.Update())
+      return;
+
+
+   if(MarketData.IsNewBar())
+   {
+
+      Logger.Info("New Candle Detected");
+
+   }
 
 
 }
